@@ -54,9 +54,6 @@ cov = [
   "cov-report",
 ]
 
-#[[tool.hatch.envs.all.matrix]]
-#python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
-
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 django = ["3.2.25", "4.1.13", "4.2.11", "5.0.3"]
@@ -68,6 +65,7 @@ django = ["5.0.3"]
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
+  "django-stubs[compatible-mypy]"
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/cowsay_django tests}"
@@ -90,3 +88,11 @@ exclude_lines = [
   "if __name__ == .__main__.:",
   "if TYPE_CHECKING:",
 ]
+
+[tool.mypy]
+mypy_path = "./stubs"
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "mycowsay.settings"
+
