@@ -6,6 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cowsay Django</title>
+    <link rel="icon" href="{% url 'favicon' %}" type="image/svg+xml">
     <style>
       body {
         background-color: #333; /* Dark gray background */
@@ -53,9 +54,10 @@
         border-radius: 5px;
       }
     </style>
-    <!-- Example of including a static CSS file in a Django template -->
+    <!-- Example of including a static CSS file in a Django template
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    -->
   </head>
   <body>
     <h1>Welcome to Cowsay Django!</h1>

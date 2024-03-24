@@ -1,3 +1,7 @@
+from django.http import HttpRequest, HttpResponse
+from django.views.decorators.cache import cache_control
+from django.views.decorators.http import require_GET
+
 from django.shortcuts import render
 
 import cowsay
@@ -25,4 +29,17 @@ def index(request):
             # Include the original text if you want to remember it as well
             "original_text": text,
         },
+    )
+
+@require_GET
+@cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day
+def favicon(request: HttpRequest) -> HttpResponse:
+    print("favicon")
+    return HttpResponse(
+        (
+            '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
+            + '<text y=".9em" font-size="90">🐮</text>'
+            + "</svg>"
+        ),
+        content_type="image/svg+xml",
     )
