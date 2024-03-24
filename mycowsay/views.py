@@ -4,7 +4,8 @@ import cowsay
 
 
 def index(request):
-    message = "Hello from cowsay!"  # Default message
+    text = "Hello from cowsay!"
+    character = "cow"
     if request.method == "POST":
         character = request.POST.get(
             "character", "cow"

@@ -38,11 +38,27 @@ Source = "https://github.com/unknown/cowsay-django"
 path = "src/cowsay_django/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = [
+dependencies = []
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+django = ["3.2.25", "4.1.13", "4.2.11"]
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12"]
+django = ["5.0.3"]
+
+[tool.hatch.envs.test]
+extra-dependencies = [
+  "Django=={matrix:django}",
   "coverage[toml]>=6.5",
   "pytest",
+  "pytest-cov ~=4.0",
+  "pytest-asyncio >=0.21.0",
+  "pytest-django ~=4.5.2",
 ]
-[tool.hatch.envs.default.scripts]
+
+[tool.hatch.envs.test.scripts]
 test = "pytest {args:tests}"
 test-cov = "coverage run -m pytest {args:tests}"
 cov-report = [
@@ -53,14 +69,6 @@ cov = [
   "test-cov",
   "cov-report",
 ]
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
-django = ["3.2.25", "4.1.13", "4.2.11", "5.0.3"]
-
-[[tool.hatch.envs.all.matrix]]
-python = ["3.10", "3.11", "3.12"]
-django = ["5.0.3"]
 
 [tool.hatch.envs.types]
 dependencies = [
