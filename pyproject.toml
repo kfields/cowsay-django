@@ -78,6 +78,28 @@ dependencies = [
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/cowsay_django tests}"
 
+# Docs
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "mkdocs >=1.5.3",
+  "mkdocs-material >=9.5.15",
+  "mkdocs-minify-plugin >=0.8.0",
+  "pymdown-extensions >=10.7.1",
+  "Markdown >=3.6",
+  "pydoc-markdown[novella] >=4.8.2",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = [
+  "python docs/pre_build.py",
+  "mkdocs build",
+]
+serve = "mkdocs serve"
+deploy = "mkdocs gh-deploy --force"
+
+# Coverage
+
 [tool.coverage.run]
 source_pkgs = ["cowsay_django", "tests"]
 branch = true
