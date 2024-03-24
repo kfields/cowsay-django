@@ -1,0 +1,87 @@
+{% load cowsay_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cowsay Django</title>
+    <style>
+      body {
+        background-color: #333; /* Dark gray background */
+        color: #eee; /* Light, off-white text */
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex; /* Enable flexbox */
+        flex-direction: column; /* Stack children vertically */
+        align-items: center; /* Center-align the children horizontally */
+        gap: 10px; /* Add space between each form item */
+      }
+
+      form,
+      pre {
+        margin: 0 auto; /* Center form and pre horizontally */
+        margin-bottom: 20px; /* Add a little space below the form and pre */
+      }
+
+      textarea {
+        width: 600px; /* Make the textarea full-width */
+      }
+      input[type="text"],
+      textarea,
+      button {
+        margin: 5px 0; /* Add a little space around inputs and buttons */
+      }
+
+      pre {
+        text-align: left; /* Align pre text to the left */
+        display: inline-block; /* Treat the pre block as an inline element for centering */
+        white-space: pre-wrap; /* Ensure long text wraps */
+        word-wrap: break-word; /* Break the words to prevent overflow */
+        background-color: #444; /* Slightly lighter background for contrast */
+        padding: 10px;
+        border-radius: 5px;
+      }
+    </style>
+    <!-- Example of including a static CSS file in a Django template -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <h1>Welcome to Cowsay Django!</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      <div>
+        <label for="character">Choose a character:</label>
+        <select id="character" name="character">
+          {% for character in characters %}
+          <option value="{{ character }}" {% if character == selected_character %}selected{% endif %}>{{ character }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <label for="text">Say something:</label>
+
+      <div>
+        <!--<input type="text" id="text" name="text" />-->
+        <textarea id="text" name="text" rows="4" cols="50">{{ original_text }}</textarea>
+      </div>
+      <button type="submit">Speak</button>
+
+    </form>
+    <!-- Use the custom cowsay tag here -->
+    {% if message %}
+    <pre>{% cowsays character message %}</pre>
+    {% endif %}
+  </body>
+</html>
