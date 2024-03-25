@@ -34,7 +34,6 @@ def index(request):
 @require_GET
 @cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day
 def favicon(request: HttpRequest) -> HttpResponse:
-    print("favicon")
     return HttpResponse(
         (
             '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'
