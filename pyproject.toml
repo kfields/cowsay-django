@@ -74,7 +74,7 @@ extra-dependencies = [
 # Coverage
 [tool.hatch.envs.coverage]
 detached = true
-dependencies = [
+extra_dependencies = [
   "lxml",
 ]
 [tool.hatch.envs.coverage.scripts]
