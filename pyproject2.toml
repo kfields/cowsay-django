@@ -38,25 +38,7 @@ Source = "https://github.com/unknown/cowsay-django"
 path = "src/cowsay_django/__about__.py"
 
 [tool.hatch.envs.default]
-dependencies = [
-  "coverage[toml]>=6.2",
-  "pytest",
-  "pytest-cov",
-  "pytest-asyncio >=0.21.0",
-  "pytest-django ~=4.5.2",
-]
-
-[tool.hatch.envs.default.scripts]
-test = "pytest {args:tests}"
-test-cov = "coverage run -m pytest {args:tests}"
-cov-report = [
-  "- coverage combine",
-  "coverage report",
-]
-cov = [
-  "test-cov",
-  "cov-report",
-]
+dependencies = []
 
 [[tool.hatch.envs.test.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
@@ -69,20 +51,25 @@ django = ["5.0.3"]
 [tool.hatch.envs.test]
 extra-dependencies = [
   "Django=={matrix:django}",
+  "coverage[toml]>=6.5",
+  "pytest",
+  "pytest-cov ~=4.0",
+  "pytest-asyncio >=0.21.0",
+  "pytest-django ~=4.5.2",
 ]
 
-# Coverage
-[tool.hatch.envs.coverage]
-detached = true
-dependencies = [
-  "lxml",
+[tool.hatch.envs.test.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
 ]
-[tool.hatch.envs.coverage.scripts]
-combine = "coverage combine {args}"
-report-xml = "coverage xml"
-report-uncovered-html = "coverage html --skip-covered --skip-empty"
+cov = [
+  "test-cov",
+  "cov-report",
+]
 
-# Types
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
@@ -114,7 +101,7 @@ deploy = "mkdocs gh-deploy --force"
 [tool.coverage.run]
 source_pkgs = ["cowsay_django", "tests"]
 branch = true
-#parallel = true
+parallel = true
 omit = [
   "src/cowsay_django/__about__.py",
 ]
