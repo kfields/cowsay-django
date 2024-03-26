@@ -1,5 +1,4 @@
 from django import template
-import subprocess
 
 import cowsay
 

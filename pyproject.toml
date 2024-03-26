@@ -58,6 +58,8 @@ cov = [
   "cov-report",
 ]
 
+# Testing
+
 [[tool.hatch.envs.test.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
 django = ["3.2.25", "4.1.13", "4.2.11"]
@@ -71,7 +73,10 @@ extra-dependencies = [
   "Django=={matrix:django}",
 ]
 
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "mycowsay.settings"
 # Coverage
+
 [tool.hatch.envs.coverage]
 detached = true
 dependencies = [
@@ -84,6 +89,7 @@ report-xml = "coverage xml"
 report-uncovered-html = "coverage html --skip-covered --skip-empty"
 
 # Types
+
 [tool.hatch.envs.types]
 dependencies = [
   "mypy>=1.0.0",
@@ -91,6 +97,16 @@ dependencies = [
 ]
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/cowsay_django tests}"
+
+# Linting
+
+[tool.hatch.envs.lint]
+detached = true
+dependencies = ["black>=23.1.0", "ruff>=0.0.243"]
+
+[tool.hatch.envs.lint.scripts]
+check = ["ruff check {args:.}", "black --check --diff {args:.}"]
+fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
 
 # Docs
 
@@ -138,4 +154,16 @@ plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
 django_settings_module = "mycowsay.settings"
+
+[tool.ruff]
+exclude = ["stubs"]
+line-length = 100
+src = ["src", "tests", "mycowsay"]
+
+[tool.ruff.lint]
+select = ["E", "F", "ERA", "I"]
+ignore = [
+  "TID252",
+  "E501",   # line too long, handled by black
+]
 

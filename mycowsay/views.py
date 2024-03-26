@@ -1,10 +1,8 @@
+import cowsay
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_GET
-
-from django.shortcuts import render
-
-import cowsay
 
 
 def index(request):
