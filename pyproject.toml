@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "cowsay-django"
 dynamic = ["version"]
-description = 'Django app that uses cowsay to render text in a cow bubble.'
+description = 'Django app that uses cowsay to render text in a cow bubble'
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
