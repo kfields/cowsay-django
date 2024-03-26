@@ -113,7 +113,7 @@ deploy = "mkdocs gh-deploy --force"
 # Coverage
 
 [tool.coverage.run]
-relative_files = true
+#relative_files = true
 source_pkgs = ["cowsay_django", "tests"]
 branch = true
 #parallel = true
