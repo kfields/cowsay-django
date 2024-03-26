@@ -5,11 +5,11 @@ build-backend = "hatchling.build"
 [project]
 name = "cowsay-django"
 dynamic = ["version"]
-description = ''
+description = 'Django app that uses cowsay to render text in a cow bubble.'
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = []
+keywords = ["cowsay", "Django"]
 authors = [
   { name = "kfields", email = "kurtisfields@gmail.com" },
 ]
@@ -30,9 +30,9 @@ dependencies = [
 ]
 
 [project.urls]
-Documentation = "https://github.com/unknown/cowsay-django#readme"
-Issues = "https://github.com/unknown/cowsay-django/issues"
-Source = "https://github.com/unknown/cowsay-django"
+Documentation = "https://kfields.github.io/cowsay-django"
+Issues = "https://github.com/kfields/cowsay-django/issues"
+Source = "https://github.com/kfields/cowsay-django"
 
 [tool.hatch.version]
 path = "src/cowsay_django/__about__.py"
