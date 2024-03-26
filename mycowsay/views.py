@@ -9,9 +9,7 @@ def index(request):
     text = "Hello from cowsay!"
     character = "cow"
     if request.method == "POST":
-        character = request.POST.get(
-            "character", "cow"
-        )  # Default to 'cow' if not specified
+        character = request.POST.get("character", "cow")  # Default to 'cow' if not specified
         # Extract the text input from the form
         text = request.POST.get("text", "")
 
@@ -28,6 +26,7 @@ def index(request):
             "original_text": text,
         },
     )
+
 
 @require_GET
 @cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day

@@ -98,16 +98,6 @@ dependencies = [
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/cowsay_django tests}"
 
-# Linting
-
-[tool.hatch.envs.lint]
-detached = true
-dependencies = ["black>=23.1.0", "ruff>=0.0.243"]
-
-[tool.hatch.envs.lint.scripts]
-check = ["ruff check {args:.}", "black --check --diff {args:.}"]
-fmt = ["black {args:.}", "ruff --fix {args:.}", "style"]
-
 # Docs
 
 [tool.hatch.envs.docs]
