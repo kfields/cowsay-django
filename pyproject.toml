@@ -122,7 +122,7 @@ deploy = "mkdocs gh-deploy --force"
 #relative_files = true
 source_pkgs = ["cowsay_django", "tests"]
 branch = true
-#parallel = true
+parallel = true
 omit = [
   "src/cowsay_django/__about__.py",
 ]
