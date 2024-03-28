@@ -1,0 +1,58 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  release:
+    types: [released]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: |
+              3.10
+              3.11
+              3.12
+
+      - name: Set up pip cache
+        if: runner.os == 'Linux'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('pyproject.toml') }}
+          restore-keys: ${{ runner.os }}-pip-
+  
+      - name: Install Hatch
+        run: pip install hatch
+
+      - name: Run static analysis
+        run: hatch fmt --check
+  
+      - name: Check types
+        run: hatch run types:check
+  
+      - name: Run Tests
+        run: hatch run test:test-cov
+  
+      - name: Combine coverage data
+        run: hatch run coverage:combine
+
+      - name: Report coverage
+        run: hatch run coverage:report-xml
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
