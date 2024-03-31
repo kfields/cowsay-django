@@ -1,5 +1,7 @@
 site_name: Cowsay Django
 
+dev_addr: 127.0.0.1:7000
+
 theme:
   name: material
   language: en

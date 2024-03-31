@@ -58,6 +58,11 @@ cov = [
   "cov-report",
 ]
 
+makemigrations = "python -m manage makemigrations"
+migrate = "python -m manage migrate"
+createsuperuser = "python -m manage createsuperuser"
+serve = "python -m manage runserver"
+
 # Testing
 
 [[tool.hatch.envs.test.matrix]]
@@ -73,8 +78,6 @@ extra-dependencies = [
   "Django=={matrix:django}",
 ]
 
-[tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "mycowsay.settings"
 # Coverage
 
 [tool.hatch.envs.coverage]
@@ -116,6 +119,11 @@ build = [
 serve = "mkdocs serve"
 deploy = "mkdocs gh-deploy --force"
 
+# PyTest
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "mycowsay.settings"
+
 # Coverage
 
 [tool.coverage.run]
@@ -137,12 +145,16 @@ exclude_lines = [
   "if TYPE_CHECKING:",
 ]
 
+# Mypy
+
 [tool.mypy]
 mypy_path = "./stubs"
 plugins = ["mypy_django_plugin.main"]
 
 [tool.django-stubs]
 django_settings_module = "mycowsay.settings"
+
+# Ruff
 
 [tool.ruff]
 exclude = ["stubs"]

@@ -1,17 +1,16 @@
 # Welcome to Cowsay Django
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+```
+  _______
+| Django! |
+  =======
+       \
+        \
+          ^__^
+          (oo)\_______
+          (__)\       )\/\
+              ||----w |
+              ||     ||
+```
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+This is a work in progress that uses [hatch](https://hatch.pypa.io/) to manage [Django](https://www.djangoproject.com/) apps and projects.
